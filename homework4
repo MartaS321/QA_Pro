@@ -1,0 +1,29 @@
+function checkProbabilityTheory(count, min, max) {
+  let allNumbers = 0;
+  let numbersOfEven = 0;
+  let numbersOfOdd = 0;
+
+  for (let i=0; i < count; i++) {
+    const randomNumbers = Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log(randomNumbers);
+
+    if (randomNumbers % 2 === 0) {
+      numbersOfEven++;
+    }
+
+    if (randomNumbers % 2 != 0) {
+      numbersOfOdd++;
+    }
+  
+    allNumbers++;
+
+  }
+  const percentageOfEvenToAll = (numbersOfEven/allNumbers)*100;
+  const percentageOfOddToAll = (numbersOfOdd/allNumbers)*100;
+
+  console.log('Кількість згенерованих чисел:' + allNumbers);
+  console.log('Кількість парних чисел:' + numbersOfEven);
+  console.log('Кількість непарних чисел:' + numbersOfOdd);
+  console.log('Відсоток парних до непарних:' + percentageOfEvenToAll + '%' + percentageOfOddToAll);
+}
+checkProbabilityTheory(5, 100, 1000);
