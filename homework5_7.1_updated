@@ -1,0 +1,17 @@
+function getInfo() {
+    for (let key in cat) {
+        console.log(key + ':' + cat[key]);
+        };
+}
+var cat = {
+    name: 'Ice',
+    color: 'white',
+    age: 2,
+    alwaysHungry: true
+}
+getInfo();
+
+cat.eyes = 'blue';
+cat.happy = true;
+
+getInfo();
