@@ -1,0 +1,42 @@
+function price() {
+    let totalPrice = 0;
+    for (let key in services) {
+        let onlyNumbers = parseInt(services[key]);
+        totalPrice += onlyNumbers;  
+    }
+        console.log("price", totalPrice);    
+}
+
+function minPrice() {
+    let min = Infinity;
+    for (let key in services) {
+        let onlyNumbers = parseInt(services[key]);
+    if (onlyNumbers < min) {
+        min = Math.min(onlyNumbers);
+    }
+}
+console.log("minPrice", min);
+}
+
+function maxPrice() {
+    let max = 0;
+    for (let key in services) {
+        let onlyNumbers = parseInt(services[key]);
+    if (onlyNumbers > max) {
+        max = Math.max(onlyNumbers);
+    }
+}
+console.log("maxPrice", max);
+}
+
+var services = {
+    "Стрижка": "60 грн",
+    "Гоління": "80 грн",
+    "Миття голови": "100 грн"
+    }
+
+services["Розбити скло"] = "200 грн";  
+ 
+price();
+minPrice();
+maxPrice();
