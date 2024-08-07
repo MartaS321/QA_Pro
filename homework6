@@ -1,0 +1,70 @@
+function findValueByKey(companyName) {
+  if (companyName === 'Велика Компанія') {
+    for (let i = 0; i < company.clients.length; i++) {
+      for (let key in company.clients[i]) {
+        if (key != 'partners') {
+          console.log(key + ':' + company.clients[i][key])
+        }
+      }
+    }
+  } else if (companyName === 'Клієнт 1') {
+    for (let i = 0; i < company.clients[0].partners.length; i++) {
+      for (let key in company.clients[0].partners[i]) {
+        if (key != 'partners') {
+        console.log(key + ':' + company.clients[0].partners[i][key]);
+       }
+     }
+   }
+ } else if (companyName === 'Клієнт 1.2') {
+  for (let i = 0; i < company.clients[0].partners[1].partners.length; i++) {
+    for (let key in company.clients[0].partners[1].partners[i]) {
+      console.log(key + ':' + company.clients[0].partners[1].partners[i][key]);
+     }
+   }
+ }
+};
+
+const company = {
+    name: 'Велика Компанія',
+    type:'Головна компанія',
+    platform: 'Платформа для продажу квитків',
+    sellsSolution: 'Рішення для продажу квитків',
+    clients: [
+      {
+        name: 'Клієнт 1',
+        type: 'subCompany',
+        uses: 'ПО для продажу квитків',
+        sells: 'Рішення для продажу квитків',
+        partners: [
+          {
+            name: 'Клієнт 1.1',
+            type: 'subSubCompany',
+            uses: 'Рішення для продажу квитків',
+            sells: 'Рішення для продажу квитків',
+          },
+          {
+            name: 'Клієнт 1.2',
+            type: 'subSubCompany',
+            uses: 'Рішення для продажу квитків',
+            sells: 'Рішення для продажу квитків',
+            partners: [
+              {
+                name: 'Клієнт 1.2.3',
+                type: 'subSubCompany',
+                uses: 'Рішення для продажу квитків',
+                sells: 'Рішення для продажу квитків',
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Клієнт 2',
+        type: 'subCompany',
+        uses: 'ПО для продажу квитків',
+        sells: 'Рішення для продажу квитків'
+      }
+    ]
+  };
+
+findValueByKey('Велика Компанія');
