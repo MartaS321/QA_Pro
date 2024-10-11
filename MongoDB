@@ -1,0 +1,60 @@
+1. db.UserProfile.find({name:{$regex:"qw", $options: "i"}})
+2. db.UserProfile.find({country:"Ukraine"})
+3. db.UserProfile.find({country:""})
+4. db.UserProfile.find({$where: function() {
+    return this.name && !/^a/i.test(this.name);
+  }
+})
+5. db.Users.aggregate([
+  {
+    $lookup: {
+      from: "UserProfile",
+      localField: "_id",
+      foreignField: "userId",
+      as: "users_info"
+    }
+  }
+])
+6. db.createCollection("Cars")
+
+7. db.Cars.insertMany([{"carBrandId":ObjectId("67081cad0b31f29460c73bf8"),"carModelId":ObjectId("670820d40b31f29460c73bfd"),"userId":ObjectId("670803d811a8b73073c73bf8"),"mileage":"100","initialMileage":"23","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf9"),"carModelId":ObjectId("6708210a0b31f29460c73bfe"),"userId":ObjectId("670803d811a8b73073c73bf9"),"mileage":"110","initialMileage":"19","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bfa"),"carModelId":ObjectId("670821320b31f29460c73bff"),"userId":ObjectId("670804e811a8b73073c73bfa"),"mileage":"90","initialMileage":"17","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf8"),"carModelId":ObjectId("670820d40b31f29460c73bfd"),"userId":ObjectId("670804e811a8b73073c73bfc"),"mileage":"200","initialMileage":"10","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf9"),"carModelId":ObjectId("6708210a0b31f29460c73bfe"),"userId":ObjectId("670804e811a8b73073c73bfc"),"mileage":"95","initialMileage":"22","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf8"),"carModelId":ObjectId("670820d40b31f29460c73bfd"),"userId":ObjectId("670804e811a8b73073c73bfa"),"mileage":"450","initialMileage":"20","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf9"),"carModelId":ObjectId("6708210a0b31f29460c73bfe"),"userId":ObjectId("670803d811a8b73073c73bf9"),"mileage":"500","initialMileage":"13","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bfa"),"carModelId":ObjectId("670821320b31f29460c73bff"),"userId":ObjectId("670804e811a8b73073c73bfa"),"mileage":"90","initialMileage":"25","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf8"),"carModelId":ObjectId("670820d40b31f29460c73bfd"),"userId":ObjectId("670804e811a8b73073c73bfc"),"mileage":"211","initialMileage":"32","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()},{"carBrandId":ObjectId("67081cad0b31f29460c73bf9"),"carModelId":ObjectId("6708210a0b31f29460c73bfe"),"userId":ObjectId("670804e811a8b73073c73bfa"),"mileage":"144","initialMileage":"18","updatedMileageAt":new Date(),"createdAt":new Date(),"updatedAt":new Date(),"carCreatedAt":new Date()}])
+
+8. db.Cars.aggregate([
+{
+    $lookup: {
+      from: "UserProfile",
+      localField: "userId",
+      foreignField: "userId",
+      as: "UserProfile"
+    }
+  },
+  {
+    $lookup: {
+      from: "CarBrands",
+      localField: "carBrandId",
+      foreignField: "_id",
+      as: "CarBrand"
+    }
+  },
+  {
+  $match:{
+      mileage:{$gte:100}}
+  },
+  {
+  $match:{
+      "CarBrand.title":"Audi"}}
+])
+
+9. db.CarBrands.aggregate([
+  {
+    $lookup: {
+      from: "Cars",
+      localField: "_id",
+      foreignField: "carBrandId",
+      as: "info"
+    }
+  },
+  {
+  $match:{
+      title:{$in:["Audi", "BMW"]}}}
+])
